@@ -23,6 +23,11 @@ final class DataMasker implements DataMaskerInterface
         $this->rules = [];
     }
 
+    /**
+     * @template T
+     * @param T $data
+     * @return (T is string ? string : (T is array ? array<mixed> : (T is object ? object : T)))
+     */
     public function mask(mixed $data): mixed
     {
         if ($this->rules === []) {

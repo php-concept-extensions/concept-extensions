@@ -75,6 +75,6 @@
     ],
     "scripts": {
         "phpstan": "vendor/bin/phpstan analyse --memory-limit=512M",
-        "test": "EXTENSION_TEST_AUTOLOAD=$PWD/vendor/autoload.php find packages -name phpunit.xml.dist -print0 | xargs -0 -n1 -I{} vendor/bin/phpunit -c {}"
+        "test": "EXTENSION_TEST_AUTOLOAD=\"$(pwd)/vendor/autoload.php\" find packages -name phpunit.xml.dist -print0 | xargs -0 -n1 -I{} vendor/bin/phpunit -c {}"
     }
 }
