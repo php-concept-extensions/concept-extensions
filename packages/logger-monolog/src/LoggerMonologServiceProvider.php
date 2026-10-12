@@ -1,0 +1,94 @@
+<?php declare(strict_types=1);
+
+namespace Concept\Extensions\LoggerMonolog;
+
+use Closure;
+use Concept\Extensions\DataMasker\Contracts\DataMaskerInterface;
+use Concept\Extensions\Event\Events\ExtensionAwakened;
+use Concept\Extensions\Event\Support\EventDispatcherResolver;
+use Concept\Extensions\LoggerMonolog\Contracts\LoggerInterface;
+use Concept\Support\FactoryResolver;
+use InvalidArgumentException;
+use League\Container\ServiceProvider\AbstractServiceProvider;
+use League\Container\ServiceProvider\BootableServiceProviderInterface;
+use Monolog\Handler\HandlerInterface;
+use Monolog\Logger as Monolog;
+use Monolog\Processor\PsrLogMessageProcessor;
+use Psr\Container\ContainerInterface;
+
+final class LoggerMonologServiceProvider extends AbstractServiceProvider implements BootableServiceProviderInterface
+{
+    private const string EXTENSION_NAME = 'logger-monolog';
+
+    private const string ERR_EMPTY_HANDLERS = 'LoggerMonologServiceProvider requires at least one Monolog handler.';
+
+    /**
+     * @param list<HandlerInterface> $handlers Primary Monolog handlers (file, stderr, custom, …).
+     * @param Closure(): ?DataMaskerInterface|null $dataMaskerFactory
+     */
+    public function __construct(
+        private readonly array $handlers,
+        private readonly string $channel = 'app',
+        private readonly ?Closure $dataMaskerFactory = null,
+    ) {
+        if ($this->handlers === []) {
+            throw new InvalidArgumentException(self::ERR_EMPTY_HANDLERS);
+        }
+    }
+
+    public function provides(string $id): bool
+    {
+        return $id === LoggerInterface::class || $id === LogHandlerRegistry::class;
+    }
+
+    public function register(): void
+    {
+        $container = $this->getContainer();
+
+        $container->add(LoggerInterface::class, function() use ($container): Logger {
+            EventDispatcherResolver::optional($container)?->dispatch(new ExtensionAwakened(
+                extensionName: self::EXTENSION_NAME,
+                anchorId: LoggerInterface::class,
+            ));
+
+            $monolog = new Monolog($this->channel);
+            $this->setup($monolog, $container);
+
+            return new Logger($monolog, $this->resolveDataMasker());
+        })->setShared(true);
+    }
+
+    private function resolveDataMasker(): ?DataMaskerInterface
+    {
+        return FactoryResolver::optional(
+            $this->dataMaskerFactory,
+            DataMaskerInterface::class,
+            'Data masker factory result',
+        );
+    }
+
+    public function boot(): void
+    {
+        $this->getContainer()
+            ->add(LogHandlerRegistry::class, fn(): LogHandlerRegistry => new LogHandlerRegistry())
+            ->setShared(true);
+    }
+
+    private function setup(Monolog $monolog, ContainerInterface $container): void
+    {
+        foreach ($this->handlers as $handler) {
+            $monolog->pushHandler($handler);
+        }
+
+        if ($container->has(LogHandlerRegistry::class)) {
+            /** @var LogHandlerRegistry $registry */
+            $registry = $container->get(LogHandlerRegistry::class);
+
+            foreach ($registry->resolve($container) as $handler) {
+                $monolog->pushHandler($handler);
+            }
+        }
+
+        $monolog->pushProcessor(new PsrLogMessageProcessor());
+    }
+}

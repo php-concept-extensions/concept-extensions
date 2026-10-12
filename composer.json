@@ -1,0 +1,80 @@
+{
+    "name": "php-concept/extensions",
+    "description": "Concept extensions monorepo (dev root \u2014 packages are published via split)",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.4",
+        "php-concept/extension-casting-valinor": "^1.0",
+        "php-concept/extension-components": "^1.0",
+        "php-concept/extension-config": "^1.0",
+        "php-concept/extension-console-symfony": "^1.0",
+        "php-concept/extension-csrf": "^1.0",
+        "php-concept/extension-data-masker": "^1.0",
+        "php-concept/extension-database-eloquent": "^1.0",
+        "php-concept/extension-error-handler-whoops": "^1.0",
+        "php-concept/extension-event": "^1.0",
+        "php-concept/extension-form-request": "^1.0",
+        "php-concept/extension-http": "^1.0",
+        "php-concept/extension-json": "^1.0",
+        "php-concept/extension-logger-monolog": "^1.0",
+        "php-concept/extension-path-manager": "^1.0",
+        "php-concept/extension-session-symfony": "^1.0",
+        "php-concept/extension-support": "^1.0",
+        "php-concept/extension-telemetry": "^1.0",
+        "php-concept/extension-validation-rakit": "^1.0",
+        "php-concept/extension-view": "^1.0",
+        "php-concept/extension-view-plates": "^1.0",
+        "php-concept/extension-view-twig": "^1.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^11"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/*",
+            "options": {
+                "symlink": true,
+                "versions": {
+                    "php-concept/extension-casting-valinor": "1.0.0",
+                    "php-concept/extension-components": "1.0.0",
+                    "php-concept/extension-config": "1.0.0",
+                    "php-concept/extension-console-symfony": "1.0.0",
+                    "php-concept/extension-csrf": "1.0.0",
+                    "php-concept/extension-data-masker": "1.0.0",
+                    "php-concept/extension-database-eloquent": "1.0.0",
+                    "php-concept/extension-error-handler-whoops": "1.0.0",
+                    "php-concept/extension-event": "1.0.0",
+                    "php-concept/extension-form-request": "1.0.0",
+                    "php-concept/extension-http": "1.0.0",
+                    "php-concept/extension-json": "1.0.0",
+                    "php-concept/extension-logger-monolog": "1.0.0",
+                    "php-concept/extension-path-manager": "1.0.0",
+                    "php-concept/extension-session-symfony": "1.0.0",
+                    "php-concept/extension-support": "1.0.0",
+                    "php-concept/extension-telemetry": "1.0.0",
+                    "php-concept/extension-validation-rakit": "1.0.0",
+                    "php-concept/extension-view": "1.0.0",
+                    "php-concept/extension-view-plates": "1.0.0",
+                    "php-concept/extension-view-twig": "1.0.0"
+                }
+            }
+        },
+        {
+            "type": "path",
+            "url": "../concept-core-2",
+            "options": {
+                "symlink": true,
+                "versions": {
+                    "php-concept/core-2": "1.0.0"
+                }
+            }
+        }
+    ],
+    "scripts": {
+        "phpstan": "vendor/bin/phpstan analyse --memory-limit=512M",
+        "test": "EXTENSION_TEST_AUTOLOAD=$PWD/vendor/autoload.php find packages -name phpunit.xml.dist -print0 | xargs -0 -n1 -I{} vendor/bin/phpunit -c {}"
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "name": "php-concept/extension-components",
+    "description": "Concept Components extension \u2014 plugin manifest registry and boot wiring",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Concept\\Extensions\\Components\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.4",
+        "php-concept/extension-database-eloquent": "^1.0",
+        "php-concept/extension-event": "^1.0",
+        "psr/event-dispatcher": "^1.0",
+        "psr/container": "^2.0",
+        "league/container": "^5.1",
+        "symfony/console": "^7.2",
+        "symfony/filesystem": "^7.2"
+    }
+}

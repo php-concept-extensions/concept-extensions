@@ -1,0 +1,14 @@
+{
+    "name": "php-concept/extension-support",
+    "description": "Concept Extension Support \u2014 dependency-free runtime contract and factory helpers",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Concept\\Support\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.4"
+    }
+}

@@ -1,0 +1,83 @@
+name: Split packages
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  split:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          # Default persist uses GITHUB_TOKEN and overrides URL PAT → 403 as github-actions[bot]
+          persist-credentials: false
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Install splitsh-lite
+        run: |
+          curl -fsSL https://github.com/splitsh/lite/releases/download/v1.0.1/lite_linux_amd64.tar.gz \
+            | tar -xzf - -O ./splitsh-lite > /usr/local/bin/splitsh-lite
+          chmod +x /usr/local/bin/splitsh-lite
+          test -x /usr/local/bin/splitsh-lite
+
+      - name: Push split repos (+ same tag when release)
+        env:
+          SPLIT_PUSH_TOKEN: ${{ secrets.SPLIT_PUSH_TOKEN }}
+        run: |
+          if [[ -z "${SPLIT_PUSH_TOKEN:-}" ]]; then
+            echo "SPLIT_PUSH_TOKEN secret is required for push." >&2
+            echo "Create a PAT with write access to php-concept-extensions/extension-* repos," >&2
+            echo "then: gh secret set SPLIT_PUSH_TOKEN --repo php-concept-extensions/concept-extensions" >&2
+            exit 1
+          fi
+
+          TAG=""
+          if [[ "${GITHUB_REF_TYPE:-}" == "tag" ]]; then
+            TAG="${GITHUB_REF_NAME}"
+            echo "Release tag: $TAG"
+          fi
+
+          # GitHub occasionally returns "fatal error in commit_refs" — retry with backoff.
+          push_with_retry() {
+            local remote="$1" refspec="$2"
+            local attempt=1 max=5 delay=5
+            while true; do
+              if git push "$remote" "$refspec"; then
+                return 0
+              fi
+              if (( attempt >= max )); then
+                echo "Push failed after ${max} attempts: $refspec" >&2
+                return 1
+              fi
+              echo "Push rejected (attempt ${attempt}/${max}), retry in ${delay}s…" >&2
+              sleep "$delay"
+              delay=$((delay * 2))
+              attempt=$((attempt + 1))
+            done
+          }
+
+          while IFS=$'\t' read -r prefix repo; do
+            echo "Splitting $prefix -> $repo"
+            SHA=$(splitsh-lite --prefix="$prefix" -- HEAD)
+            REMOTE="https://x-access-token:${SPLIT_PUSH_TOKEN}@github.com/php-concept-extensions/${repo}.git"
+            push_with_retry "$REMOTE" "+${SHA}:refs/heads/main"
+            if [[ -n "$TAG" ]]; then
+              push_with_retry "$REMOTE" "${SHA}:refs/tags/${TAG}"
+            fi
+          done < <(php -r '
+            $map = json_decode(file_get_contents("packages.json"), true)["packages"];
+            foreach ($map as $path => $repo) {
+              echo $path, "\t", $repo, "\n";
+            }
+          ')

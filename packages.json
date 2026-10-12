@@ -1,0 +1,27 @@
+{
+    "org": "php-concept-extensions",
+    "monorepo": "concept-extensions",
+    "packages": {
+        "packages/casting-valinor": "extension-casting-valinor",
+        "packages/components": "extension-components",
+        "packages/config": "extension-config",
+        "packages/console-symfony": "extension-console-symfony",
+        "packages/csrf": "extension-csrf",
+        "packages/data-masker": "extension-data-masker",
+        "packages/database-eloquent": "extension-database-eloquent",
+        "packages/error-handler-whoops": "extension-error-handler-whoops",
+        "packages/event": "extension-event",
+        "packages/form-request": "extension-form-request",
+        "packages/http": "extension-http",
+        "packages/json": "extension-json",
+        "packages/logger-monolog": "extension-logger-monolog",
+        "packages/path-manager": "extension-path-manager",
+        "packages/session-symfony": "extension-session-symfony",
+        "packages/support": "extension-support",
+        "packages/telemetry": "extension-telemetry",
+        "packages/validation-rakit": "extension-validation-rakit",
+        "packages/view": "extension-view",
+        "packages/view-plates": "extension-view-plates",
+        "packages/view-twig": "extension-view-twig"
+    }
+}
