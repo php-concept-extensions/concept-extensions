@@ -1,10 +1,8 @@
 /vendor/
-/composer.lock
 .env
 .idea/
 *.cache
 /packages/*/vendor/
-/packages/*/composer.lock
 /packages/*/.phpunit.cache/
 .phpunit.cache/
 .phpunit.result.cache
