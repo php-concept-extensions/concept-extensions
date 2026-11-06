@@ -64,12 +64,12 @@ run_update() {
     local label="$2"
 
     if [[ $DRY_RUN -eq 1 ]]; then
-        echo "dry-run: composer update in $label"
+        echo "dry-run: composer update --no-install in $label"
         return 0
     fi
 
     echo "==> $label"
-    (cd "$dir" && composer update)
+    (cd "$dir" && composer update --no-install)
 }
 
 cd "$ROOT"

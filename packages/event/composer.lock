@@ -508,16 +508,16 @@
         },
         {
             "name": "php-concept/core-2",
-            "version": "v1.0.6",
+            "version": "v1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-concept/concept-core-2.git",
-                "reference": "8d753ed931d1fdc2a0e332e44a151a2855a67e73"
+                "reference": "df54479e9c7673858ae99b3fdbabc86273062eb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-concept/concept-core-2/zipball/8d753ed931d1fdc2a0e332e44a151a2855a67e73",
-                "reference": "8d753ed931d1fdc2a0e332e44a151a2855a67e73",
+                "url": "https://api.github.com/repos/php-concept/concept-core-2/zipball/df54479e9c7673858ae99b3fdbabc86273062eb2",
+                "reference": "df54479e9c7673858ae99b3fdbabc86273062eb2",
                 "shasum": ""
             },
             "require": {
@@ -545,9 +545,9 @@
             "description": "Concept Framework Core Engine",
             "support": {
                 "issues": "https://github.com/php-concept/concept-core-2/issues",
-                "source": "https://github.com/php-concept/concept-core-2/tree/v1.0.6"
+                "source": "https://github.com/php-concept/concept-core-2/tree/v1.0.7"
             },
-            "time": "2026-11-06T09:45:40+00:00"
+            "time": "2026-11-06T10:49:13+00:00"
         },
         {
             "name": "psr/container",
