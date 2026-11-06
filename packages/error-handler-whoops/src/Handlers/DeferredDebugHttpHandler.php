@@ -30,6 +30,6 @@ final class DeferredDebugHttpHandler extends Handler
         $handler->setException($this->getException());
         $handler->setInspector($this->getInspector());
 
-        return $handler->handle();
+        return $handler->handle() ?? Handler::DONE;
     }
 }
