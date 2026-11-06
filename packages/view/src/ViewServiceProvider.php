@@ -75,7 +75,10 @@ final class ViewServiceProvider extends AbstractServiceProvider
             /** @var ViewRegistry $viewRegistry */
             $viewRegistry = ContainerDependency::get($container, ViewRegistry::class);
 
-            return new ViewRouteNamespaceResolver($viewRegistry->routeNamespace());
+            return new ViewRouteNamespaceResolver(
+                $viewRegistry->routeNamespace(),
+                ContainerDependency::get($container, RequestContextInterface::class),
+            );
         })->setShared(true);
 
         $container->add(ViewResponseFactoryInterface::class, function(): ViewResponseFactory {

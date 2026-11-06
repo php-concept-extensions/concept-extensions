@@ -4,8 +4,10 @@ namespace Concept\Extensions\ErrorHandlerWhoops;
 
 use Closure;
 use Concept\Core\Container\ContainerDependency;
+use Concept\Core\Http\Contracts\RequestContextInterface;
 use Concept\Extensions\ErrorHandlerWhoops\Contracts\ExceptionReporterInterface;
 use Concept\Extensions\ErrorHandlerWhoops\Contracts\HttpErrorRendererInterface;
+use Concept\Extensions\ErrorHandlerWhoops\Handlers\DeferredDebugHttpHandler;
 use Concept\Extensions\ErrorHandlerWhoops\Handlers\RenderHttpErrorHandler;
 use Concept\Extensions\ErrorHandlerWhoops\Handlers\ReportExceptionHandler;
 use Concept\Extensions\Event\Events\ExtensionAwakened;
@@ -93,13 +95,7 @@ final class ErrorHandlerWhoopsServiceProvider extends AbstractServiceProvider im
     private function buildHandlers(): array
     {
         $container = $this->getContainer();
-        $uriFactory = static function() use ($container): string {
-            if ($container->has(ServerRequestInterface::class)) {
-                return ContainerDependency::get($container, ServerRequestInterface::class)
-                    ->getUri()
-                    ->getPath();
-            }
-
+        $uriFactory = static function(): string {
             if (isset($_SERVER['REQUEST_URI']) && is_string($_SERVER['REQUEST_URI'])) {
                 return $_SERVER['REQUEST_URI'];
             }
@@ -119,23 +115,15 @@ final class ErrorHandlerWhoopsServiceProvider extends AbstractServiceProvider im
 
         $debugHttpHandlerFactory = $this->debugHttpHandlerFactory;
         if ($debugHttpHandlerFactory !== null) {
-            $debugHandler = $debugHttpHandlerFactory();
-            if ($debugHandler !== null) {
-                $handlers[] = $debugHandler;
-
-                return $handlers;
-            }
+            // Defer factory until exception time — boot runs before App::requestFromGlobals().
+            $handlers[] = new DeferredDebugHttpHandler($debugHttpHandlerFactory);
         }
+
+        $requestContext = ContainerDependency::getOrNull($container, RequestContextInterface::class);
 
         $handlers[] = new RenderHttpErrorHandler(
             $this->sharedHttpErrorRendererFactory,
-            static function() use ($container): ?ServerRequestInterface {
-                if (!$container->has(ServerRequestInterface::class)) {
-                    return null;
-                }
-
-                return ContainerDependency::get($container, ServerRequestInterface::class);
-            },
+            static fn(): ?ServerRequestInterface => $requestContext?->current(),
         );
 
         return $handlers;
