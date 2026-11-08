@@ -18,16 +18,6 @@ final class StubResponseFactory implements ResponseFactoryInterface
         return $this->createResponse($code);
     }
 
-    public function jsonSuccess(mixed $data = [], int $code = 200, int $jsonFlags = 0): ResponseInterface
-    {
-        return $this->createResponse($code);
-    }
-
-    public function jsonError(string $message, int $code = 500, array $errors = [], int $jsonFlags = 0): ResponseInterface
-    {
-        return $this->createResponse($code);
-    }
-
     public function redirect(string $url, int $status = 302): ResponseInterface
     {
         return $this->createResponse($status);
