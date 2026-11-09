@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6b96f3d3f26a1a2848daecb0770140e",
+    "content-hash": "cca73223d9385fe4c7bd7b7c856f2c23",
     "packages": [
         {
             "name": "brick/math",
@@ -1734,16 +1734,16 @@
         },
         {
             "name": "php-concept/extension-data-masker",
-            "version": "v1.1.4",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-concept-extensions/extension-data-masker.git",
-                "reference": "5127f518ada6ca4cad361c37e5662692931978bd"
+                "reference": "0578fb56455bc4fe2daafe478a2cb66c7b683000"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-concept-extensions/extension-data-masker/zipball/5127f518ada6ca4cad361c37e5662692931978bd",
-                "reference": "5127f518ada6ca4cad361c37e5662692931978bd",
+                "url": "https://api.github.com/repos/php-concept-extensions/extension-data-masker/zipball/0578fb56455bc4fe2daafe478a2cb66c7b683000",
+                "reference": "0578fb56455bc4fe2daafe478a2cb66c7b683000",
                 "shasum": ""
             },
             "require": {
@@ -1765,22 +1765,22 @@
             "description": "Concept DataMasker extension — redact sensitive values in logs and debug output",
             "support": {
                 "issues": "https://github.com/php-concept-extensions/extension-data-masker/issues",
-                "source": "https://github.com/php-concept-extensions/extension-data-masker/tree/v1.1.4"
+                "source": "https://github.com/php-concept-extensions/extension-data-masker/tree/v1.1.5"
             },
-            "time": "2026-11-06T10:28:46+00:00"
+            "time": "2026-11-06T10:54:47+00:00"
         },
         {
             "name": "php-concept/extension-database-eloquent",
-            "version": "v1.1.4",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-concept-extensions/extension-database-eloquent.git",
-                "reference": "45db96c726cfdaf85110053bc7a53a075d8b1c81"
+                "reference": "d495fb01fae78462e53f4f7f4499fd5599839768"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-concept-extensions/extension-database-eloquent/zipball/45db96c726cfdaf85110053bc7a53a075d8b1c81",
-                "reference": "45db96c726cfdaf85110053bc7a53a075d8b1c81",
+                "url": "https://api.github.com/repos/php-concept-extensions/extension-database-eloquent/zipball/d495fb01fae78462e53f4f7f4499fd5599839768",
+                "reference": "d495fb01fae78462e53f4f7f4499fd5599839768",
                 "shasum": ""
             },
             "require": {
@@ -1813,22 +1813,22 @@
             "description": "Concept Database extension — Illuminate Eloquent via Capsule",
             "support": {
                 "issues": "https://github.com/php-concept-extensions/extension-database-eloquent/issues",
-                "source": "https://github.com/php-concept-extensions/extension-database-eloquent/tree/v1.1.4"
+                "source": "https://github.com/php-concept-extensions/extension-database-eloquent/tree/v1.1.5"
             },
-            "time": "2026-11-06T10:28:46+00:00"
+            "time": "2026-11-06T10:54:47+00:00"
         },
         {
             "name": "php-concept/extension-event",
-            "version": "v1.1.4",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-concept-extensions/extension-event.git",
-                "reference": "c15440104e07acc0982e32da503ee75f152bc008"
+                "reference": "a2cd8bf0b5d4c7b552e49649034c0d83381f9892"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-concept-extensions/extension-event/zipball/c15440104e07acc0982e32da503ee75f152bc008",
-                "reference": "c15440104e07acc0982e32da503ee75f152bc008",
+                "url": "https://api.github.com/repos/php-concept-extensions/extension-event/zipball/a2cd8bf0b5d4c7b552e49649034c0d83381f9892",
+                "reference": "a2cd8bf0b5d4c7b552e49649034c0d83381f9892",
                 "shasum": ""
             },
             "require": {
@@ -1851,13 +1851,13 @@
             "description": "Concept Event extension — League Event dispatcher wiring",
             "support": {
                 "issues": "https://github.com/php-concept-extensions/extension-event/issues",
-                "source": "https://github.com/php-concept-extensions/extension-event/tree/v1.1.4"
+                "source": "https://github.com/php-concept-extensions/extension-event/tree/v1.1.5"
             },
-            "time": "2026-11-06T10:28:46+00:00"
+            "time": "2026-11-06T10:54:47+00:00"
         },
         {
             "name": "php-concept/extension-support",
-            "version": "v1.1.4",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-concept-extensions/extension-support.git",
@@ -1885,7 +1885,7 @@
             "description": "Concept Extension Support — dependency-free runtime contract and factory helpers",
             "support": {
                 "issues": "https://github.com/php-concept-extensions/extension-support/issues",
-                "source": "https://github.com/php-concept-extensions/extension-support/tree/v1.1.4"
+                "source": "https://github.com/php-concept-extensions/extension-support/tree/v1.1.5"
             },
             "time": "2026-11-06T10:28:46+00:00"
         },
@@ -2441,47 +2441,49 @@
         },
         {
             "name": "symfony/console",
-            "version": "v7.4.23",
+            "version": "v8.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "81957c2440c05c962fe8291f318de6e85f8db330"
+                "reference": "5a315b092b81f3e920e9daea1a2ae4c66ed298b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/81957c2440c05c962fe8291f318de6e85f8db330",
-                "reference": "81957c2440c05c962fe8291f318de6e85f8db330",
+                "url": "https://api.github.com/repos/symfony/console/zipball/5a315b092b81f3e920e9daea1a2ae4c66ed298b9",
+                "reference": "5a315b092b81f3e920e9daea1a2ae4c66ed298b9",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
+                "php": ">=8.4.1",
                 "symfony/deprecation-contracts": "^2.5|^3",
-                "symfony/polyfill-mbstring": "~1.0",
+                "symfony/polyfill-mbstring": "^1.0",
+                "symfony/polyfill-php85": "^1.32",
                 "symfony/service-contracts": "^2.5|^3",
-                "symfony/string": "^7.2|^8.0"
+                "symfony/string": "^7.4.6|^8.0.6"
             },
             "conflict": {
-                "symfony/dependency-injection": "<6.4",
-                "symfony/dotenv": "<6.4",
-                "symfony/event-dispatcher": "<6.4",
-                "symfony/lock": "<6.4",
-                "symfony/process": "<6.4"
+                "symfony/dependency-injection": "<8.1",
+                "symfony/event-dispatcher": "<8.1"
             },
             "provide": {
                 "psr/log-implementation": "1.0|2.0|3.0"
             },
             "require-dev": {
                 "psr/log": "^1|^2|^3",
-                "symfony/config": "^6.4|^7.0|^8.0",
-                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
-                "symfony/event-dispatcher": "^6.4|^7.0|^8.0",
-                "symfony/http-foundation": "^6.4|^7.0|^8.0",
-                "symfony/http-kernel": "^6.4|^7.0|^8.0",
-                "symfony/lock": "^6.4|^7.0|^8.0",
-                "symfony/messenger": "^6.4|^7.0|^8.0",
-                "symfony/process": "^6.4|^7.0|^8.0",
-                "symfony/stopwatch": "^6.4|^7.0|^8.0",
-                "symfony/var-dumper": "^6.4|^7.0|^8.0"
+                "symfony/config": "^7.4|^8.0",
+                "symfony/dependency-injection": "^8.1",
+                "symfony/event-dispatcher": "^8.1",
+                "symfony/filesystem": "^7.4|^8.0",
+                "symfony/http-foundation": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "symfony/lock": "^7.4|^8.0",
+                "symfony/messenger": "^7.4|^8.0",
+                "symfony/mime": "^7.4|^8.0",
+                "symfony/process": "^7.4|^8.0",
+                "symfony/stopwatch": "^7.4|^8.0",
+                "symfony/uid": "^7.4|^8.0",
+                "symfony/validator": "^7.4|^8.0",
+                "symfony/var-dumper": "^7.4|^8.0"
             },
             "type": "library",
             "autoload": {
@@ -2515,7 +2517,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v7.4.23"
+                "source": "https://github.com/symfony/console/tree/v8.1.11"
             },
             "funding": [
                 {
@@ -2535,7 +2537,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-03T21:47:07+00:00"
+            "time": "2026-11-04T07:07:11+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2610,25 +2612,26 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v7.4.23",
+            "version": "v8.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "53d609da66578dad5a39fe290e8f924ec8f05e93"
+                "reference": "58f57b6a33e3495f7f41e01258f1ae5ef76cccd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/53d609da66578dad5a39fe290e8f924ec8f05e93",
-                "reference": "53d609da66578dad5a39fe290e8f924ec8f05e93",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/58f57b6a33e3495f7f41e01258f1ae5ef76cccd2",
+                "reference": "58f57b6a33e3495f7f41e01258f1ae5ef76cccd2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
+                "php": ">=8.4.1",
+                "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/polyfill-ctype": "~1.8",
                 "symfony/polyfill-mbstring": "~1.8"
             },
             "require-dev": {
-                "symfony/process": "^6.4|^7.0|^8.0"
+                "symfony/process": "^7.4|^8.0"
             },
             "type": "library",
             "autoload": {
@@ -2656,7 +2659,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v7.4.23"
+                "source": "https://github.com/symfony/filesystem/tree/v8.1.11"
             },
             "funding": [
                 {
@@ -2676,7 +2679,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-04T08:27:22+00:00"
+            "time": "2026-11-04T08:39:20+00:00"
         },
         {
             "name": "symfony/finder",
