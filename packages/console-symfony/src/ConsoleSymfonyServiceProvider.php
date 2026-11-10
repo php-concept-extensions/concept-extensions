@@ -2,11 +2,16 @@
 
 namespace Concept\Extensions\ConsoleSymfony;
 
+use Closure;
+use Concept\Extensions\ConsoleSymfony\Logging\CommandLifecycleListener;
 use Concept\Extensions\Event\Events\ExtensionAwakened;
 use Concept\Extensions\Event\Support\EventDispatcherResolver;
+use Concept\Support\FactoryResolver;
 use League\Container\ServiceProvider\AbstractServiceProvider;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Throwable;
 
 class ConsoleSymfonyServiceProvider extends AbstractServiceProvider
@@ -17,11 +22,13 @@ class ConsoleSymfonyServiceProvider extends AbstractServiceProvider
 
     /**
      * @param list<class-string<Command>> $commands
+     * @param Closure(): ?LoggerInterface|null $loggerFactory
      */
     public function __construct(
         private readonly string $appName,
         private readonly string $appVersion,
         private readonly array $commands,
+        private readonly ?Closure $loggerFactory = null,
     ) {}
 
     public function provides(string $id): bool
@@ -44,9 +51,27 @@ class ConsoleSymfonyServiceProvider extends AbstractServiceProvider
                 $this->appVersion !== '' ? $this->appVersion : self::DEFAULT_VERSION,
             );
             $this->addConsoleCommands($consoleApplication, $container);
+            $this->attachCommandLogging($consoleApplication);
 
             return $consoleApplication;
         })->setShared(true);
+    }
+
+    private function attachCommandLogging(ConsoleApplication $consoleApplication): void
+    {
+        $logger = FactoryResolver::optional(
+            $this->loggerFactory,
+            LoggerInterface::class,
+            'Console command logger factory result',
+        );
+
+        if ($logger === null) {
+            return;
+        }
+
+        $dispatcher = new EventDispatcher();
+        $dispatcher->addSubscriber(new CommandLifecycleListener($logger));
+        $consoleApplication->setDispatcher($dispatcher);
     }
 
     private function addConsoleCommands(ConsoleApplication $consoleApplication, \Psr\Container\ContainerInterface $container): void
