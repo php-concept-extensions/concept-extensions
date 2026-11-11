@@ -25,6 +25,9 @@ final class CommandLifecycleListener implements EventSubscriberInterface
         private readonly LoggerInterface $logger,
     ) {}
 
+    /**
+     * @return array<string, string>
+     */
     public static function getSubscribedEvents(): array
     {
         return [
